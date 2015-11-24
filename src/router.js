@@ -26,7 +26,7 @@ function eventRouter(options) {
 						throw expose(new TypeError(`Invalid ${route} request.`));
 
 					if("event" in data)
-						return filter(this, data.event, options.filter, Promise.resolve).then(result => {
+						return filter(this, data.event, options.filter, result => Promise.resolve(result)).then(result => {
 							if(result !== options.filterInverse)
 								return connector[route](
 									this.origin.eventsApi,
