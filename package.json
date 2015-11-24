@@ -1,6 +1,6 @@
 {
 	"name": "owe-events",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"description": "Exposes EventEmitters in owe.js APIs via bidirectional protocol wrappers.",
 	"keywords": [
 		"owe",
@@ -18,11 +18,15 @@
 		"type": "git",
 		"url": "https://github.com/runnr/owe-events.git"
 	},
+	"engines": {
+		"node": ">=5.0"
+	},
 	"main": "src/index.js",
 	"dependencies": {
 		"owe-helpers": "^0.9"
 	},
 	"peerDependencies": {
+		"owe-helpers": "^0.9",
 		"owe-core": "^0.9"
 	},
 	"devDependencies": {
