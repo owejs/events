@@ -34,7 +34,7 @@ function eventRouter(options) {
 									data
 								);
 
-							throw expose(new Error(`The event ${data.event} is not exposed.`));
+							throw expose(new Error(`The event '${data.event}' is not exposed.`));
 						});
 
 					return connector[route](
