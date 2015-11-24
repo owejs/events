@@ -7,6 +7,8 @@ const expose = require("./expose");
 const connector = require("./connector");
 
 function eventRouter(options) {
+	if(typeof options !== "object" || options === null)
+		options = {};
 
 	options = {
 		filter: "filter" in options ? options.filter : false,
