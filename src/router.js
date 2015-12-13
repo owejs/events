@@ -2,7 +2,6 @@
 
 const owe = require("owe-core");
 const filter = require("owe-helpers").filter;
-const expose = require("./expose");
 
 const connector = require("./connector");
 
@@ -17,13 +16,13 @@ function eventRouter(options) {
 
 	return function servedEventRouter(route) {
 		if(!owe.client.isApi(this.origin.eventsApi))
-			throw expose(new Error(`Events cannot be accessed via this protocol.`));
+			throw new owe.exposed.Error(`Events cannot be accessed via this protocol.`);
 
 		if(route in connector)
 			return owe(null, {
 				closer: data => {
 					if(!data || typeof data !== "object")
-						throw expose(new TypeError(`Invalid ${route} request.`));
+						throw new owe.exposed.TypeError(`Invalid ${route} request.`);
 
 					if("event" in data)
 						return filter(this, data.event, options.filter, result => Promise.resolve(result)).then(result => {
@@ -34,7 +33,7 @@ function eventRouter(options) {
 									data
 								);
 
-							throw expose(new Error(`The event '${data.event}' is not exposed.`));
+							throw new owe.exposed.Error(`The event '${data.event}' is not exposed.`);
 						});
 
 					return connector[route](
@@ -45,7 +44,7 @@ function eventRouter(options) {
 				}
 			});
 
-		throw expose(new Error(`Events cannot be accessed via method '${route}'.`));
+		throw new owe.exposed.Error(`Events cannot be accessed via method '${route}'.`);
 	};
 }
 

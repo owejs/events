@@ -1,6 +1,6 @@
 "use strict";
 
-const expose = require("../expose");
+const owe = require("owe-core");
 
 const counter = require("../counter")();
 
@@ -49,7 +49,7 @@ const pending = {
 		const entry = pendingMap.get(confirmation.id);
 
 		if(!entry)
-			throw expose(new Error(`Invalid pending id '${confirmation.id}'.`));
+			throw new owe.exposed.Error(`Invalid pending id '${confirmation.id}'.`);
 
 		if(entry.token !== confirmation.token) {
 			entry.tokenReceiver.reject(new Error("The listener handshake was unexpectedly disrupted."));

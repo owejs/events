@@ -1,7 +1,6 @@
 "use strict";
 
 const owe = require("owe-core");
-const expose = require("../expose");
 const generating = require("../generatingMaps");
 
 const pending = require("./pending");
@@ -78,10 +77,10 @@ const messageHandlers = {
 owe(receiver, {
 	closer(data) {
 		if(!owe.client.isApi(this.origin.eventsApi))
-			throw expose(new Error(`Events cannot be accessed via this protocol.`));
+			throw new owe.exposed.Error(`Events cannot be accessed via this protocol.`);
 
 		if(!data || typeof data !== "object" || !(data.type in messageHandlers))
-			throw expose(new TypeError("Invalid message."));
+			throw new owe.exposed.TypeError("Invalid message.");
 
 		return messageHandlers[data.type](connectorApis.get(this.origin.eventsApi), data);
 	}

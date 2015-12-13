@@ -1,6 +1,6 @@
 {
 	"name": "owe-events",
-	"version": "0.9.4",
+	"version": "0.10.0",
 	"description": "Exposes EventEmitters in owe.js APIs via bidirectional protocol wrappers.",
 	"keywords": [
 		"owe",
@@ -26,20 +26,19 @@
 		"owe-helpers": "^0.9"
 	},
 	"peerDependencies": {
-		"owe-helpers": "^0.9",
-		"owe-core": "^0.9"
+		"owe-core": "^0.10"
 	},
 	"devDependencies": {
-		"owe-core": "^0.9",
-		"eslint": "1.10.1",
+		"owe-core": "^0.10",
+		"eslint": "1.10.3",
 		"expect.js": "0.3.1",
 		"gulp": "3.9.0",
-		"gulp-eslint": "1.1.0",
-		"gulp-istanbul": "0.10.2",
+		"gulp-eslint": "1.1.1",
+		"gulp-istanbul": "0.10.3",
 		"gulp-mocha": "2.2.0",
 		"mocha": "2.3.4",
 		"run-sequence": "1.1.5",
-		"coveralls": "2.11.4"
+		"coveralls": "2.11.6"
 	},
 	"scripts": {
 		"test": "./node_modules/gulp/bin/gulp.js test"

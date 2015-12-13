@@ -1,7 +1,6 @@
 "use strict";
 
 const owe = require("owe-core");
-const expose = require("../expose");
 const generating = require("../generatingMaps");
 
 const EventEmitter = require("./EventEmitter");
@@ -30,7 +29,7 @@ const connector = {
 		const eventEmitter = EventEmitter.lookupObject(object);
 
 		if(!eventEmitter)
-			throw expose(new Error("This EventEmitter does not have any listeners yet."));
+			throw new owe.exposed.Error("This EventEmitter does not have any listeners yet.");
 
 		api = receiverApis.get(api);
 		eventEmitter.removeListener(data.event, api);
@@ -49,7 +48,7 @@ const connector = {
 		const eventEmitter = EventEmitter.lookupObject(object);
 
 		if(!eventEmitter)
-			throw expose(new Error("This EventEmitter does not have any listeners yet."));
+			throw new owe.exposed.Error("This EventEmitter does not have any listeners yet.");
 
 		receiverApis.get(api).close({
 			type: "confirmation",
@@ -80,10 +79,10 @@ owe(connector, {
 
 	closer(data) {
 		if(!owe.client.isApi(this.origin.eventsApi))
-			throw expose(new Error("Events cannot be accessed via this protocol."));
+			throw new owe.exposed.Error("Events cannot be accessed via this protocol.");
 
 		if(!data || typeof data !== "object" || !(data.type in messageHandlers))
-			throw expose(new TypeError("Invalid message."));
+			throw new owe.exposed.TypeError("Invalid message.");
 
 		return messageHandlers[data.type](this.origin.eventsApi, data);
 	}
