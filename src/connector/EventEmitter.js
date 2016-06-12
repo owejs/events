@@ -37,12 +37,12 @@ class EventEmitter {
 
 			const eventMeta = {
 				apis: new Set(),
-				listener() {
+				listener(...args) {
 					const send = {
 						type: "emit",
 						object: id,
 						event,
-						args: [...arguments]
+						args
 					};
 
 					eventMeta.apis.forEach(api => api.close(send));

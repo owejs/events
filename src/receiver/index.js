@@ -75,14 +75,14 @@ const messageHandlers = {
 };
 
 owe(receiver, {
-	closer(data) {
-		if(!owe.client.isApi(this.origin.eventsApi))
-			throw new owe.exposed.Error(`Events cannot be accessed via this protocol.`);
+	closer(data, state) {
+		if(!owe.client.isApi(state.origin.eventsApi))
+			throw new owe.exposed.Error("Events cannot be accessed via this protocol.");
 
 		if(!data || typeof data !== "object" || !(data.type in messageHandlers))
 			throw new owe.exposed.TypeError("Invalid message.");
 
-		return messageHandlers[data.type](connectorApis.get(this.origin.eventsApi), data);
+		return messageHandlers[data.type](connectorApis.get(state.origin.eventsApi), data);
 	}
 });
 

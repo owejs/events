@@ -158,7 +158,6 @@ const listeners = {
 	},
 
 	addCallDelayer(event, delayer) {
-
 		if(event === undefined)
 			event = null;
 

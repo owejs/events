@@ -9,9 +9,7 @@ const events = {
 		receiver: require("./receiver"),
 		connector: require("./connector")
 	}, {
-		router(route) {
-			return this.value[route];
-		}
+		router: (destination, state) => state.value[destination]
 	}),
 	router: require("./router")
 };

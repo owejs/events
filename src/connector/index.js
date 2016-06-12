@@ -77,14 +77,14 @@ owe(connector, {
 		return emitter.object;
 	},
 
-	closer(data) {
-		if(!owe.client.isApi(this.origin.eventsApi))
+	closer(data, state) {
+		if(!owe.client.isApi(state.origin.eventsApi))
 			throw new owe.exposed.Error("Events cannot be accessed via this protocol.");
 
 		if(!data || typeof data !== "object" || !(data.type in messageHandlers))
 			throw new owe.exposed.TypeError("Invalid message.");
 
-		return messageHandlers[data.type](this.origin.eventsApi, data);
+		return messageHandlers[data.type](state.origin.eventsApi, data);
 	}
 });
 

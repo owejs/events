@@ -1,9 +1,10 @@
 "use strict";
 
 const ClientApi = require("owe-core/src/ClientApi");
+const passthrough = require("owe-core").proxify.passthrough;
 
 module.exports = receiver => {
-	Object.assign(ClientApi.prototype, {
+	const extension = {
 		addListener(event, listener) {
 			return receiver.addListener(this, event, listener);
 		},
@@ -27,7 +28,10 @@ module.exports = receiver => {
 		listenerCount(event) {
 			return receiver.listenerCount(this, event);
 		}
-	});
+	};
 
-	ClientApi.prototype.on = ClientApi.prototype.addListener;
+	extension.on = extension.addListener;
+
+	Object.assign(ClientApi.prototype, extension);
+	Object.keys(extension).forEach(key => ClientApi.prototype[passthrough].add(key));
 };
